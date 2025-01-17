@@ -94,7 +94,7 @@ const GetCompany = () => {
 
 const styles = {
     container: {
-        height: "220vh",
+        height: "280vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

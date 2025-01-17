@@ -32,6 +32,25 @@ const JobTable = () => {
     }
   };
 
+  const deleteJob = async (jobId) => {
+    if (!window.confirm("Are you sure you want to delete this job?")) return;
+
+    try {
+      const response = await axios.delete(`http://localhost:8000/api/v1/job/delete/${jobId}`, {
+        withCredentials: true,
+      });
+
+      if (response.data.success) {
+        setJobs((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
+        alert("Job deleted successfully.");
+      } else {
+        alert(response.data.message || "Failed to delete job.");
+      }
+    } catch (error) {
+      alert("An error occurred while deleting the job.");
+    }
+  };
+
   useEffect(() => {
     fetchJobs();
   }, []);
@@ -104,8 +123,16 @@ const JobTable = () => {
                         variant="outlined"
                         color="inherit"
                         onClick={() => navigate(`/applicants/${job._id}`)}
+                        style={{ marginRight: "10px" }}
                       >
                         Applicants
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => deleteJob(job._id)}
+                      >
+                        Delete
                       </Button>
                     </td>
                   </tr>

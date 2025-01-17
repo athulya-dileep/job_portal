@@ -31,19 +31,23 @@ const ViewApplicants = () => {
     const fetchApplicants = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/api/v1/application/${id}/applicants`, // Matches backend route
+          `http://localhost:8000/api/v1/application/${id}/applicants`, 
           { withCredentials: true }
         );
         setApplicants(response.data.job.applications || []);
         setJobName(response.data.job.name || "Unknown Job");
       } catch (err) {
-        setError(err.response?.data?.message || "Failed to fetch applicants.");
+        console.error('Error:', err);  // Log the full error for debugging
+        setError(
+          err.response?.data?.message || err.message || "Failed to fetch applicants."
+        );
       } finally {
         setLoading(false);
       }
     };
     fetchApplicants();
   }, [id]);
+  
 
   const statusHandler = async (status, applicantId) => {
     try {
