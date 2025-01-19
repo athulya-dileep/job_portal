@@ -107,10 +107,10 @@ const BrowseJobs = () => {
               <div className="flex items-center gap-2 mt-4">
                 <Badge className="text-blue-700 font-bold">
                   {job?.position || 0} Positions
-                </Badge>
+                </Badge> &nbsp;
                 <Badge className="text-[#F83002] font-bold">
                   {job?.jobType || 'Job Type'}
-                </Badge>
+                </Badge> &nbsp;
                 <Badge className="text-[#7209b7] font-bold">
                   {job?.salary || 0} LPA
                 </Badge>
